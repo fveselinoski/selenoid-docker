@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  selenoid:
+    image: "aerokube/selenoid:latest-release"
+    network_mode: bridge
+    ports:
+      - "4444:4444"
+    volumes:
+      - "$PWD:/etc/selenoid/" # assumes directory contains browsers.json
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      - DOCKER_API_VERSION=`docker version -f '{{json .Client.DefaultAPIVersion}}'`
+    command: ["-conf", "/etc/selenoid/browsers.json", "-timeout", "5m0s", "-limit", "4"]
