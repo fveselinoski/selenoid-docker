@@ -10,5 +10,5 @@ services:
       - "$PWD:/etc/selenoid/" # assumes directory contains browsers.json
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
-      - DOCKER_API_VERSION=`docker version -f '{{json .Client.DefaultAPIVersion}}'`
+      - DOCKER_API_VERSION="1.35"
     command: ["-conf", "/etc/selenoid/browsers.json", "-timeout", "5m0s", "-limit", "4"]
